@@ -1,0 +1,73 @@
+[
+    {
+        "question": "What is the capital of France?",
+        "options": {
+            "A": "Berlin",
+            "B": "Madrid",
+            "C": "Paris",
+            "D": "Rome"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which planet is known as the Red Planet?",
+        "options": {
+            "A": "Earth",
+            "B": "Mars",
+            "C": "Jupiter",
+            "D": "Saturn"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the largest ocean on Earth?",
+        "options": {
+            "A": "Atlantic Ocean",
+            "B": "Indian Ocean",
+            "C": "Arctic Ocean",
+            "D": "Pacific Ocean"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Who wrote 'To Kill a Mockingbird'?",
+        "options": {
+            "A": "Harper Lee",
+            "B": "J.K. Rowling",
+            "C": "Ernest Hemingway",
+            "D": "Mark Twain"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the hardest natural substance on Earth?",
+        "options": {
+            "A": "Gold",
+            "B": "Iron",
+            "C": "Diamond",
+            "D": "Platinum"
+        },
+        "answer": "C"
+    },
+
+    {
+        "question": "What is the chemical symbol for gold?",
+        "options": {
+            "A": "Au",
+            "B": "Ag",
+            "C": "Pb",
+            "D": "Fe"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which country is known as the Land of the Rising Sun?",
+        "options": {
+            "A": "China",
+            "B": "Japan",
+            "C": "Thailand",
+            "D": "South Korea"
+        },
+        "answer": "B"
+    }
+]
