@@ -4,6 +4,9 @@ def connect_to_server():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_address = ('localhost', 12348)
 
+    init_msg = str(input("Message to Server: "))
+    client_socket.sendto(init_msg.encode(), server_address)
+
     while True:
         client_socket.sendto(b'GET_QUESTION', server_address)
         question_message, _ = client_socket.recvfrom(1024)
@@ -18,10 +21,10 @@ def connect_to_server():
         print(response_message.decode())
 
         if "Congratulations!" in response_message.decode() or "Disconnecting." in response_message.decode():
-            # client_socket.close()
+            client_socket.close()
             break
 
-    # client_socket.close()
+    client_socket.close()
 
 if __name__ == "__main__":
     connect_to_server()

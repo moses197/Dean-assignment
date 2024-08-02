@@ -16,6 +16,9 @@ def start_server():
     server_socket.bind(('localhost', 12348))
     print("Server started and listening on port 12348.")
 
+    data, _ = server_socket.recvfrom(1024)
+    print(f"Client message: {data} from client {_}")
+
     clients = {}
 
     while True:
@@ -27,9 +30,11 @@ def start_server():
 
         client_data = clients[client_address]
         if client_data['correct_answers'] >= 7:
-            server_socket.sendto("Congratulations! You have answered 10 questions correctly! 🎉".encode(), client_address)
+            server_socket.sendto("Congratulations! You have answered all the questions correctly! 🎉".encode(), client_address)
             # server_socket.close()
-            break
+            client_data['current_question_index'] = 0
+
+            continue
 
         question = questions[client_data['current_question_index']]
         question_text = question['question']
