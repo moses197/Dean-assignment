@@ -4,36 +4,57 @@ def connect_to_server():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_address = ('localhost', 12347)
 
-    init_msg = str(input("Message to Server: "))
+    init_msg = input("Message to Server: ")
     client_socket.sendto(init_msg.encode(), server_address)
 
     recv_msg, _ = client_socket.recvfrom(1024)
     print(f"Message from server: {recv_msg.decode()}")
-    print("I want to play game")
+    print("I want to play a game")
     print()
-    try:
-        while True:
-            client_socket.sendto(b'GET_QUESTION', server_address)
-            question_message, _ = client_socket.recvfrom(1024)
-            print(question_message.decode())
+
+    # try:
+    while True:
+        client_socket.sendto(b'GET_QUESTION', server_address)
+        question_message, _ = client_socket.recvfrom(1024)
+        question_message = question_message.decode()
+
+        
+        # if "Congratulations!" in question_message:
+        #     print(f"Yoof....{question_message}")
+        #     break
 
 
+        print(question_message)
 
-            # if "Your answer (A/B/C/D):" in question_message.decode():
-            if "A: " in question_message.decode():
-                answer = input("Enter your answer (A/B/C/D): ").strip().upper()
-                client_socket.sendto(answer.encode(), server_address)
+        if "Disconnecting." in question_message:
+            print("Try again later")
+            break
 
-            response_message, _ = client_socket.recvfrom(1024)
-            print(response_message.decode())
+        if "A: " in question_message:
+            answer = input("Enter your answer (A/B/C/D): ").strip().upper()
+            client_socket.sendto(answer.encode(), server_address)
 
-            if "Congratulations!" in response_message.decode() or "Disconnecting." in response_message.decode():
-                # client_socket.close()
-                break
-        print("Closing connecting")
-        client_socket.close()
-    finally:
-        pass
+            
+
+        response_message, _ = client_socket.recvfrom(1024)
+        response_message = response_message.decode()
+
+        print(f"{response_message}")
+
+        
+        if "Congratulations!" in response_message:
+            print(f"Yoo....{response_message}")
+            break
+
+        if "Disconnecting." in response_message:
+            print("Try again later")
+            break
+
+    print("Closing connection")
+    client_socket.close()
+    # except Exception as e:
+    #     print(f"An error occurred: {e}")
+    #     client_socket.close()
 
 if __name__ == "__main__":
     connect_to_server()

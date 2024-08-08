@@ -57,12 +57,12 @@ def handle_client(message, addr, server_socket):
                 client_data['current_question_index'] += 1
                 client_data['attempts'] = 0  # Reset attempts
             else:
-                server_socket.sendto(b"wrong answer", addr)
                 client_data['attempts'] += 1
                 # time.sleep(.6)
                 print(f"Wrong answer. Attempt {client_data['attempts']} of 3.")
                 if client_data['attempts'] == 3:
                     server_socket.sendto(b'You have exceeded the maximum number of attempts. Disconnecting.\n', addr)
+                    # time.sleep(.6)
                     del clients[addr]
                     del client_states[addr]
                 else:
