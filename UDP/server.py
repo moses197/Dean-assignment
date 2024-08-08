@@ -11,13 +11,19 @@ with open('question.json') as f:
 # Shuffle questions
 random.shuffle(questions)
 
+client_states = {}
+
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server_socket.bind(('localhost', 12348))
+    server_address = ('localhost', 12347)
+    server_socket.bind(server_address)
     print("Server started and listening on port 12348.")
 
     data, _ = server_socket.recvfrom(1024)
     print(f"Client message: {data} from client {_}")
+
+    snd_2_client = str(input("Message to Client: "))
+    server_socket.sendto(snd_2_client.encode(), _)
 
     clients = {}
 
@@ -71,6 +77,9 @@ def start_server():
             print(f"{client_data['current_question_index']} is the CQI")
 
 if __name__ == "__main__":
+    
     thread = threading.Thread(target=start_server)
     thread.start()
     # start_server()
+
+
